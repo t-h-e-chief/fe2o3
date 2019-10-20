@@ -1,0 +1,19 @@
+
+language: rust
+
+services:
+  - docker
+
+os:
+  - linux
+
+script: >-
+  docker build -t thechieftain/fe3o2:latest .
+
+deploy:
+  provider: script
+  script: >-
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
+    docker push thechieftain/fe3o2:latest
+  on:
+    branch: master
